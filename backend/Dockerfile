@@ -40,4 +40,4 @@ EXPOSE 8000
 # --host 0.0.0.0  : listen on all interfaces (required inside Docker)
 # --port 8000     : match the EXPOSE above
 # --workers 1     : single worker (use Gunicorn + multiple workers in prod)
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
