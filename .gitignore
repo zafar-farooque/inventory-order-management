@@ -1,0 +1,29 @@
+# Environment files — NEVER commit these
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Node / React
+node_modules/
+frontend/build/
+frontend/node_modules/
+
+# Alembic cache
+alembic/versions/__pycache__/
+
+# Editor & OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+Thumbs.db
