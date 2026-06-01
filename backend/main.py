@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from typing import List, Optional
 
 from fastapi import FastAPI, Depends
@@ -10,11 +11,21 @@ from database import Base, engine, get_db
 from models import Product, Customer, Order
 from routers import products, customers, orders
 
+import logging
+logger = logging.getLogger(__name__)
+
 # ─────────────────────────────────────────────────────────────────────────────
-# Create all database tables on startup (for development).
-# In production, use Alembic migrations instead:  alembic upgrade head
+# Lifespan: create tables on startup (gracefully — won't crash if DB is down)
 # ─────────────────────────────────────────────────────────────────────────────
-Base.metadata.create_all(bind=engine)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        Base.metadata.create_all(bind=engine)
+        logger.info("✅ Database tables verified/created.")
+    except Exception as e:
+        logger.error(f"⚠️  Could not create tables on startup: {e}")
+    yield  # app runs here
+    # (shutdown logic can go here if needed)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # FastAPI app instance
@@ -28,6 +39,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
