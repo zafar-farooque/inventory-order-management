@@ -15,7 +15,6 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        {/* Brand */}
         <NavLink to="/" className="navbar-brand" onClick={() => setOpen(false)}>
           <div className="brand-icon">🏪</div>
           <div className="brand-name">
@@ -24,7 +23,6 @@ export default function Navbar() {
           </div>
         </NavLink>
 
-        {/* Mobile toggle */}
         <button
           className="navbar-toggle"
           onClick={() => setOpen((o) => !o)}
@@ -33,7 +31,6 @@ export default function Navbar() {
           {open ? '✕' : '☰'}
         </button>
 
-        {/* Links */}
         <ul className={`navbar-links${open ? ' open' : ''}`}>
           {NAV_ITEMS.map(({ to, label, icon }) => (
             <li key={to}>

@@ -1,11 +1,10 @@
-/* ─── Navbar ─────────────────────────────────── */
 .navbar {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
 }
 
 .navbar-inner {
@@ -18,7 +17,6 @@
   justify-content: space-between;
 }
 
-/* Brand */
 .navbar-brand {
   display: flex;
   align-items: center;
@@ -42,7 +40,6 @@
 .navbar-brand .brand-name { display: flex; flex-direction: column; line-height: 1.1; }
 .navbar-brand .brand-sub  { font-size: 0.65rem; color: var(--color-text-muted); font-weight: 400; letter-spacing: 0.05em; }
 
-/* Nav links */
 .navbar-links {
   display: flex;
   align-items: center;
@@ -69,11 +66,10 @@
 }
 .nav-link.active {
   color: var(--color-primary);
-  background: rgba(108, 99, 255, 0.12);
+  background: rgba(79, 70, 229, 0.08);
 }
 .nav-link .nav-icon { font-size: 1rem; }
 
-/* Mobile hamburger */
 .navbar-toggle {
   display: none;
   background: none;
@@ -84,7 +80,6 @@
   padding: var(--space-sm);
 }
 
-/* Mobile nav */
 @media (max-width: 720px) {
   .navbar-toggle { display: flex; align-items: center; }
 

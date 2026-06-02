@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import api from '../api/axios';
 
-/* ─── Stat Card ─────────────────────────────────────────────────────────── */
 function StatCard({ icon, value, label, accent }) {
   return (
     <div className="stat-card" style={{ '--accent': accent }}>
@@ -12,7 +11,6 @@ function StatCard({ icon, value, label, accent }) {
   );
 }
 
-/* ─── Low-Stock row ─────────────────────────────────────────────────────── */
 function LowStockRow({ product }) {
   const badgeClass =
     product.quantity === 0 ? 'badge-cancelled' :
@@ -32,7 +30,6 @@ function LowStockRow({ product }) {
   );
 }
 
-/* ─── Dashboard ─────────────────────────────────────────────────────────── */
 export default function Dashboard() {
   const [data, setData]       = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,7 +46,6 @@ export default function Dashboard() {
 
   useEffect(() => { fetchDashboard(); }, [fetchDashboard]);
 
-  /* ── Loading ── */
   if (loading) return (
     <div className="state-container">
       <div className="spinner" />
@@ -57,7 +53,6 @@ export default function Dashboard() {
     </div>
   );
 
-  /* ── Error ── */
   if (error) return (
     <div className="state-container">
       <div className="state-icon">⚠️</div>
@@ -73,7 +68,6 @@ export default function Dashboard() {
 
   return (
     <div>
-      {/* ── Page header ── */}
       <div className="page-header">
         <div>
           <h1>📊 Dashboard</h1>
@@ -82,26 +76,10 @@ export default function Dashboard() {
         <button className="btn btn-ghost" onClick={fetchDashboard}>↺ Refresh</button>
       </div>
 
-      {/* ── Stat cards ── */}
       <div className="grid-4" style={{ marginBottom: 'var(--space-xl)' }}>
-        <StatCard
-          icon="📦"
-          value={data.total_products}
-          label="Total Products"
-          accent="var(--color-primary)"
-        />
-        <StatCard
-          icon="👥"
-          value={data.total_customers}
-          label="Total Customers"
-          accent="var(--color-info)"
-        />
-        <StatCard
-          icon="🛒"
-          value={data.total_orders}
-          label="Total Orders"
-          accent="var(--color-success)"
-        />
+        <StatCard icon="📦" value={data.total_products} label="Total Products" accent="var(--color-primary)" />
+        <StatCard icon="👥" value={data.total_customers} label="Total Customers" accent="var(--color-info)" />
+        <StatCard icon="🛒" value={data.total_orders} label="Total Orders" accent="var(--color-success)" />
         <StatCard
           icon={lowCount > 0 ? '🚨' : '✅'}
           value={lowCount}
@@ -110,11 +88,10 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* ── Low-stock table ── */}
       <div className="card">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 'var(--space-md)' }}>
           <h3>🚨 Low Stock Alerts</h3>
-          <span className="badge badge-warning">qty &lt; 10</span>
+          <span className="badge badge-warning">Qty &lt; 10</span>
         </div>
 
         {lowCount === 0 ? (

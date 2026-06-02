@@ -7,8 +7,8 @@ const selectStyle = {
   borderRadius: 'var(--radius-sm)', padding: '10px 14px', color: 'var(--color-text)',
   fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none', width: '100%', cursor: 'pointer',
 };
-const inputStyle  = { ...selectStyle, cursor: 'text' };
-const labelStyle  = {
+const inputStyle = { ...selectStyle, cursor: 'text' };
+const labelStyle = {
   display: 'block', marginBottom: 6, fontSize: '0.78rem',
   color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 500,
 };
@@ -21,11 +21,7 @@ function StatusBadge({ status }) {
 function OrderItemRow({ index, item, products, onChange, onRemove, canRemove }) {
   const selected = products.find((p) => p.id === Number(item.product_id));
   return (
-    <div style={{
-      display: 'grid', gridTemplateColumns: '1fr 110px auto', gap: 'var(--space-sm)',
-      alignItems: 'end', marginBottom: 'var(--space-sm)', padding: 'var(--space-sm) var(--space-md)',
-      background: 'var(--color-surface-2)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)',
-    }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 110px auto', gap: 'var(--space-sm)', alignItems: 'end', marginBottom: 'var(--space-sm)', padding: 'var(--space-sm) var(--space-md)', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}>
       <div>
         {index === 0 && <label style={labelStyle}>Product</label>}
         <select style={selectStyle} value={item.product_id} onChange={(e) => onChange(index, 'product_id', e.target.value)} required>
@@ -99,30 +95,21 @@ function CreateOrderForm({ customers, products, onSubmit, onCancel, submitting, 
               </select>
             )}
         </div>
-
         <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-md)', marginBottom: 'var(--space-md)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-sm)' }}>
             <label style={labelStyle}>Order Items *</label>
-            <button type="button" className="btn btn-ghost" style={{ padding: '4px 12px', fontSize: '0.8rem' }} onClick={addItem}>
-              + Add Item
-            </button>
+            <button type="button" className="btn btn-ghost" style={{ padding: '4px 12px', fontSize: '0.8rem' }} onClick={addItem}>+ Add Item</button>
           </div>
           {items.map((item, i) => (
-            <OrderItemRow key={i} index={i} item={item} products={products}
-              onChange={updateItem} onRemove={removeItem} canRemove={items.length > 1} />
+            <OrderItemRow key={i} index={i} item={item} products={products} onChange={updateItem} onRemove={removeItem} canRemove={items.length > 1} />
           ))}
         </div>
-
         {estimatedTotal > 0 && (
-          <div style={{
-            textAlign: 'right', padding: 'var(--space-sm) var(--space-md)', marginBottom: 'var(--space-md)',
-            background: 'var(--color-surface-2)', borderRadius: 'var(--radius-sm)', fontSize: '0.9rem',
-          }}>
+          <div style={{ textAlign: 'right', padding: 'var(--space-sm) var(--space-md)', marginBottom: 'var(--space-md)', background: 'var(--color-surface-2)', borderRadius: 'var(--radius-sm)', fontSize: '0.9rem' }}>
             Estimated Total:{' '}
             <strong style={{ fontSize: '1.1rem', color: 'var(--color-success)' }}>${estimatedTotal.toFixed(2)}</strong>
           </div>
         )}
-
         <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
           <button type="submit" className="btn btn-primary" disabled={submitting || customers.length === 0}>
             {submitting ? 'Placing…' : '✅ Place Order'}
@@ -135,11 +122,11 @@ function CreateOrderForm({ customers, products, onSubmit, onCancel, submitting, 
 }
 
 export default function Orders() {
-  const [orders,    setOrders]    = useState([]);
-  const [customers, setCustomers] = useState([]);
-  const [products,  setProducts]  = useState([]);
-  const [loading,   setLoading]   = useState(true);
-  const [showForm,  setShowForm]  = useState(false);
+  const [orders,     setOrders]     = useState([]);
+  const [customers,  setCustomers]  = useState([]);
+  const [products,   setProducts]   = useState([]);
+  const [loading,    setLoading]    = useState(true);
+  const [showForm,   setShowForm]   = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [formError,  setFormError]  = useState('');
   const [success,    setSuccess]    = useState('');
@@ -247,8 +234,7 @@ export default function Orders() {
                     <td>
                       <div style={{ display: 'flex', gap: 'var(--space-sm)', justifyContent: 'flex-end' }}>
                         <Link to={`/orders/${o.id}`} className="btn btn-ghost" style={{ padding: '5px 14px', fontSize: '0.8rem' }}>👁 View</Link>
-                        <button className="btn btn-danger" style={{ padding: '5px 14px', fontSize: '0.8rem' }}
-                          onClick={() => handleDelete(o)} title="Cancel order and restore stock">🚫 Cancel</button>
+                        <button className="btn btn-danger" style={{ padding: '5px 14px', fontSize: '0.8rem' }} onClick={() => handleDelete(o)}>🚫 Cancel</button>
                       </div>
                     </td>
                   </tr>
